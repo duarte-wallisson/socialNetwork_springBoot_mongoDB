@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.duartewallisson.socialnetworkmongo.domain.Post;
 import com.duartewallisson.socialnetworkmongo.domain.User;
+import com.duartewallisson.socialnetworkmongo.dto.AuthorDTO;
 import com.duartewallisson.socialnetworkmongo.repository.PostRepository;
 import com.duartewallisson.socialnetworkmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,11 @@ public class Instantiation implements CommandLineRunner {
         User eduardo = new User(null, "Eduardo Green", "eduardo.green@gmail.com");
         User maria = new User(null, "Maria Brown", "maria@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("09/03/2023"), "Partiu viagem", "Vou viajar para a Tailândia. Abraços!", eduardo);
-        Post post2 = new Post(null, sdf.parse("09/03/2023"), "Bom dia", "Acordei feliz hoje!", monica);
-
         userRepository.saveAll(Arrays.asList(monica, eduardo, maria));
+
+        Post post1 = new Post(null, sdf.parse("09/03/2023"), "Partiu viagem", "Vou viajar para a Tailândia. Abraços!", new AuthorDTO(eduardo));
+        Post post2 = new Post(null, sdf.parse("09/03/2023"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(monica));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 
