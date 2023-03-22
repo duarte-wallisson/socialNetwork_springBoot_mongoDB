@@ -1,5 +1,6 @@
 package com.duartewallisson.socialnetworkmongo.resources;
 
+import com.duartewallisson.socialnetworkmongo.domain.Post;
 import com.duartewallisson.socialnetworkmongo.domain.User;
 import com.duartewallisson.socialnetworkmongo.dto.UserDTO;
 import com.duartewallisson.socialnetworkmongo.services.UserService;
@@ -51,6 +52,12 @@ public class UserResource {
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value="/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 }
